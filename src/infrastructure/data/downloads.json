@@ -1,0 +1,100 @@
+{
+    "downloads": [
+        {
+            "id": "5a0b9a70-7953-42a8-bdf7-2355ce0fec76",
+            "userId": "user123",
+            "contentId": "movie456",
+            "status": {
+                "value": "CANCELLED"
+            },
+            "progress": 0,
+            "quality": {
+                "value": "1080p"
+            },
+            "size": 3221225472,
+            "createdAt": "2025-06-06T05:11:40.398Z",
+            "updatedAt": "2025-06-06T17:46:35.571Z",
+            "expiresAt": "2025-06-13T05:11:40.397Z"
+        },
+        {
+            "id": "6b1c8b81-9064-53b9-cef8-3466df1gd87",
+            "userId": "user123",
+            "contentId": "movie457",
+            "status": {
+                "value": "IN_PROGRESS"
+            },
+            "progress": 50,
+            "quality": {
+                "value": "720p"
+            },
+            "size": 1610612736,
+            "createdAt": "2025-06-06T04:11:40.398Z",
+            "updatedAt": "2025-06-06T05:11:40.398Z",
+            "expiresAt": "2025-06-13T04:11:40.397Z"
+        },
+        {
+            "id": "73d7558b-daa6-402b-8b1d-99aa43c11d69",
+            "userId": "user123",
+            "contentId": "movie456",
+            "status": {
+                "value": "PENDING"
+            },
+            "progress": 0,
+            "quality": {
+                "value": "1080p"
+            },
+            "size": 3221225472,
+            "createdAt": "2025-06-06T05:13:43.376Z",
+            "updatedAt": "2025-06-06T05:13:43.376Z",
+            "expiresAt": "2025-06-13T05:13:43.375Z"
+        },
+        {
+            "id": "06e38c71-c781-42ff-b803-3cd699b9a203",
+            "userId": "user123",
+            "contentId": "movie456",
+            "status": {
+                "value": "PENDING"
+            },
+            "progress": 0,
+            "quality": {
+                "value": "1080p"
+            },
+            "size": 3221225472,
+            "createdAt": "2025-06-06T05:17:59.133Z",
+            "updatedAt": "2025-06-06T05:17:59.133Z",
+            "expiresAt": "2025-06-13T05:17:59.133Z"
+        },
+        {
+            "id": "1c62f4cc-1ae3-49b5-89eb-d05f2af00a7b",
+            "userId": "user123",
+            "contentId": "movie456",
+            "status": {
+                "value": "PENDING"
+            },
+            "progress": 0,
+            "quality": {
+                "value": "1080p"
+            },
+            "size": 3221225472,
+            "createdAt": "2025-06-06T17:23:35.429Z",
+            "updatedAt": "2025-06-06T17:23:35.429Z",
+            "expiresAt": "2025-06-13T17:23:35.423Z"
+        },
+        {
+            "id": "26fee449-009a-4311-9aab-c96676f34cdf",
+            "userId": "user123",
+            "contentId": "movie456",
+            "status": {
+                "value": "PENDING"
+            },
+            "progress": 0,
+            "quality": {
+                "value": "1080p"
+            },
+            "size": 3221225472,
+            "createdAt": "2025-06-06T17:46:06.450Z",
+            "updatedAt": "2025-06-06T17:46:06.450Z",
+            "expiresAt": "2025-06-13T17:46:06.450Z"
+        }
+    ]
+}
