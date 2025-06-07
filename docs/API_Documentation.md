@@ -1,9 +1,9 @@
-# Documentación de la API de Netflix - Arquitectura Hexagonal
+# Documentación del Subdominio de Gestión de Descargas - Arquitectura Hexagonal
 
 ## Índice
 1. [Introducción](#introducción)
 2. [Arquitectura](#arquitectura)
-3. [Componentes Principales](#componentes-principales)
+3. [Componentes del Subdominio](#componentes-del-subdominio)
 4. [Endpoints](#endpoints)
 5. [Flujo de Datos](#flujo-de-datos)
 6. [Consideraciones Técnicas](#consideraciones-técnicas)
@@ -11,49 +11,55 @@
 
 ## Introducción
 
-Este documento describe la implementación de una API simulada de Netflix utilizando una arquitectura hexagonal (también conocida como ports and adapters) y principios de Domain-Driven Design (DDD). La API está diseñada para manejar la gestión de descargas de contenido, simulando las funcionalidades principales de un servicio de streaming.
+Este documento describe la implementación del subdominio de gestión de descargas utilizando una arquitectura hexagonal (también conocida como ports and adapters) y principios de Domain-Driven Design (DDD). El subdominio está diseñado para manejar la gestión de descargas de contenido de manera independiente y desacoplada.
 
 ### Objetivos
-- Implementar una arquitectura limpia y mantenible
-- Separar claramente las responsabilidades del dominio
+- Implementar una arquitectura limpia y mantenible para el subdominio de descargas
+- Separar claramente las responsabilidades del dominio de descargas
 - Facilitar el testing y la evolución del sistema
-- Proporcionar una API RESTful robusta
+- Proporcionar una API RESTful robusta para la gestión de descargas
 
 ## Arquitectura
 
 ### Arquitectura Hexagonal
-La aplicación sigue los principios de la arquitectura hexagonal, que divide el sistema en tres capas principales:
+El subdominio sigue los principios de la arquitectura hexagonal, que divide el sistema en tres capas principales:
 
 1. **Dominio (Core)**
-   - Contiene la lógica de negocio
+   - Contiene la lógica de negocio específica de descargas
    - Es independiente de frameworks y tecnologías
    - Define los puertos (interfaces) para la comunicación
 
 2. **Puertos**
-   - Interfaces que definen cómo el dominio interactúa con el mundo exterior
-   - Puertos primarios (driving): Para casos de uso
-   - Puertos secundarios (driven): Para servicios externos
+   - Interfaces que definen cómo el dominio de descargas interactúa con el mundo exterior
+   - Puertos primarios (driving): Para casos de uso de descargas
+   - Puertos secundarios (driven): Para servicios externos necesarios para las descargas
 
 3. **Adaptadores**
    - Implementaciones concretas de los puertos
-   - Adaptadores primarios: Controladores HTTP, CLI
-   - Adaptadores secundarios: Repositorios, servicios externos
+   - Adaptadores primarios: Controladores HTTP para descargas
+   - Adaptadores secundarios: Repositorios y servicios de descarga
 
 ### Estructura de Directorios
 ```
-src/
-├── domain/           # Lógica de negocio
+src/download-manager/
+├── domain/           # Lógica de negocio del subdominio
+│   ├── entities/     # Entidades del dominio
+│   ├── value-objects/# Objetos de valor
+│   ├── services/     # Servicios del dominio
+│   ├── ports/        # Interfaces del dominio
+│   ├── events/       # Eventos del dominio
+│   └── repositories/ # Interfaces de repositorios
 ├── application/      # Casos de uso
 ├── infrastructure/   # Adaptadores y configuraciones
 └── interfaces/       # Controladores y rutas
 ```
 
-## Componentes Principales
+## Componentes del Subdominio
 
-### 1. Download Manager
+### 1. Gestión de Descargas
 El módulo principal que maneja la lógica de descarga de contenido:
 
-- **Servicios**
+- **Servicios del Dominio**
   - Gestión de descargas
   - Verificación de contenido
   - Control de calidad
@@ -69,7 +75,7 @@ El módulo principal que maneja la lógica de descarga de contenido:
 
 ## Endpoints
 
-### API v1
+### API de Gestión de Descargas
 
 #### Gestión de Descargas
 - `POST /api/v1/downloads`
@@ -88,12 +94,12 @@ El módulo principal que maneja la lógica de descarga de contenido:
 
 1. **Inicio de Descarga**
    ```
-   Cliente HTTP → DownloadController → DownloadUseCase → DownloadPort → StorageAdapter
+   Cliente HTTP → DownloadController → StartDownloadUseCase → DownloadPort → StorageAdapter
    ```
 
 2. **Verificación de Contenido**
    ```
-   DownloadUseCase → ContentVerificationPort → VerificationAdapter
+   StartDownloadUseCase → ContentVerificationPort → VerificationAdapter
    ```
 
 3. **Manejo de Errores**
@@ -106,43 +112,43 @@ El módulo principal que maneja la lógica de descarga de contenido:
 ### Seguridad
 - Implementación de Helmet para headers de seguridad
 - CORS configurado para control de acceso
-- Validación de entrada en todos los endpoints
+- Validación de entrada en todos los endpoints de descarga
 
 ### Rendimiento
-- Manejo asíncrono de operaciones
-- Sistema de caché para contenido frecuente
+- Manejo asíncrono de operaciones de descarga
+- Sistema de caché para contenido frecuentemente descargado
 - Optimización de respuestas HTTP
 
 ### Mantenibilidad
-- Código modular y desacoplado
-- Patrones de diseño claros
+- Código modular y desacoplado del subdominio
+- Patrones de diseño claros para la gestión de descargas
 - Documentación integrada
 
 ## Próximos Pasos
 
 ### Mejoras Propuestas
-1. Implementación de autenticación y autorización
-2. Sistema de logging más robusto
-3. Métricas y monitoreo
-4. Tests automatizados
+1. Implementación de autenticación y autorización para descargas
+2. Sistema de logging específico para descargas
+3. Métricas y monitoreo de descargas
+4. Tests automatizados del subdominio
 5. Documentación con Swagger/OpenAPI
 
 ### Roadmap
-1. **Fase 1**: Implementación de autenticación
-2. **Fase 2**: Sistema de recomendaciones
-3. **Fase 3**: Optimización de rendimiento
-4. **Fase 4**: Integración con CDN
+1. **Fase 1**: Mejora del sistema de gestión de descargas
+2. **Fase 2**: Implementación de colas de descarga
+3. **Fase 3**: Optimización de rendimiento de descargas
+4. **Fase 4**: Integración con CDN para descargas
 
 ## Estructura Detallada de Archivos
 
-### 1. Archivos Principales
-- `src/index.js`
-  - Punto de entrada de la aplicación
+### 1. Archivos Principales del Subdominio
+- `src/download-manager/index.js`
+  - Punto de entrada del subdominio
   - Configuración de Express y middleware
   - Inicialización del contenedor de dependencias
   - Configuración de rutas y manejo de errores
 
-### 2. Download Manager (`src/download-manager/`)
+### 2. Estructura del Subdominio (`src/download-manager/`)
 #### Domain
 - `domain/entities/`
   - `Download.js`: Entidad que representa una descarga
@@ -161,10 +167,10 @@ El módulo principal que maneja la lógica de descarga de contenido:
 - `interfaces/events/`
   - `DownloadEventPublisher.js`: Publicador de eventos de descarga
 
-### 3. Infrastructure (`src/infrastructure/`)
+### 3. Infrastructure (`src/download-manager/infrastructure/`)
 #### Container
 - `container.js`
-  - Configuración de dependencias
+  - Configuración de dependencias del subdominio
   - Inicialización de servicios y repositorios
   - Inyección de dependencias
 
@@ -182,10 +188,6 @@ El módulo principal que maneja la lógica de descarga de contenido:
 - `events/MockEventPublisher.js`
   - Publicador de eventos mock
   - Simulación de eventos del sistema
-
-#### Database
-- `database/`
-  - Configuraciones de base de datos (preparado para futura implementación)
 
 ### 4. Dependencias Principales
 ```json
